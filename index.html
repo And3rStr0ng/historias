@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Historias</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="app-card">
+    <div class="header-top">
+      <h1 class="mono">Historias 24h</h1>
+      <span class="mono" id="activeCount">Historias activas: 0</span>
+    </div>
+
+    <div class="meta-bar">
+      <span class="mono" id="storageInfo">Almacenamiento: localStorage (Base64)</span>
+      <label class="test-ttl-control">
+        <span class="mono">Duración prueba:</span>
+        <select id="ttlSelect" title="Usa un tiempo corto para probar la eliminación automática">
+          <option value="86400000" selected>24 horas (real)</option>
+          <option value="30000">30 segundos (prueba)</option>
+        </select>
+      </label>
+    </div>
+
+    <!-- Lista de historias arriba + botón "+" -->
+    <section aria-label="Lista de historias">
+      <div class="stories-strip" id="storiesStrip">
+        <div class="story-item" id="addStoryBtn" role="button" tabindex="0" aria-label="Subir nueva historia">
+          <div class="story-ring add-ring">
+            <span class="add-plus mono">+</span>
+          </div>
+          <span class="story-label mono">Nueva</span>
+          <span class="story-sub mono">Max 1080×1920</span>
+        </div>
+      </div>
+    </section>
+
+    <input type="file" id="imageInput" accept="image/*" hidden />
+
+    <div class="status-box">
+      <p id="helperText">
+        Pulsa <strong>+</strong> para publicar una imagen. Se ajusta a un máximo de <strong>1080×1920 px</strong>,
+        se guarda en <code>localStorage</code> en formato Base64 y se borra automáticamente al vencer el tiempo.
+      </p>
+      <button type="button" class="btn-pill mono" id="clearExpiredBtn">Limpiar vencidas</button>
+    </div>
+  </main>
+
+  <!-- Visor de historias con soporte táctil / swipe -->
+  <div class="viewer-backdrop" id="viewerBackdrop" aria-hidden="true">
+    <div class="viewer-card" id="viewerCard">
+      <div class="progress-bars" id="progressBars"></div>
+      <div class="viewer-header">
+        <span class="mono" id="viewerCounter">Historia 1 de 1</span>
+        <span class="mono" id="viewerRemaining">--</span>
+        <button type="button" class="viewer-close mono" id="closeViewerBtn">✕</button>
+      </div>
+      <div class="viewer-stage" id="viewerStage">
+        <img id="viewerImg" alt="Historia" />
+      </div>
+      <div class="viewer-footer">
+        <button type="button" class="btn-pill mono" id="prevStoryBtn">← Anterior</button>
+        <button type="button" class="btn-pill mono" id="deleteStoryBtn">Eliminar</button>
+        <button type="button" class="btn-pill mono" id="nextStoryBtn">Siguiente →</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
